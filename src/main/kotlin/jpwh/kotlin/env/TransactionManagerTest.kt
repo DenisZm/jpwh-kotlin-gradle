@@ -30,7 +30,7 @@ open class TransactionManagerTest {
     @Throws(Exception::class)
     fun beforeSuite(
         @Optional database: String?,
-        @Optional connectionURL: String
+        @Optional connectionURL: String?
     ) {
         TM = TransactionManagerSetup(
             if (database != null)
@@ -44,12 +44,12 @@ open class TransactionManagerTest {
     @AfterSuite(alwaysRun = true)
     @Throws(Exception::class)
     fun afterSuite() {
-        TM?.stop()
+        TM.stop()
     }
 
     companion object {
 
         // Static single database connection manager per test suite
-        var TM: TransactionManagerSetup? = null
+        lateinit var TM: TransactionManagerSetup
     }
 }

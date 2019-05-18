@@ -8,6 +8,8 @@ plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
     id("org.jetbrains.kotlin.jvm").version("1.3.21")
 
+    id("org.jetbrains.kotlin.plugin.jpa").version("1.3.31")
+
     // Apply the application plugin to add support for building a CLI application.
     application
 }
@@ -24,6 +26,9 @@ dependencies {
 
     implementation("org.hibernate:hibernate-entitymanager:5.4.2.Final")
     implementation("org.codehaus.btm:btm:2.1.4")
+    implementation("org.slf4j:slf4j-jdk14:1.7.26")
+    implementation("com.h2database:h2:1.4.199")
+    implementation("org.testng:testng:6.14.3")
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")

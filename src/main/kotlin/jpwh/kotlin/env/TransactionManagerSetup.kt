@@ -29,7 +29,7 @@ open class TransactionManagerSetup @Throws(Exception::class)
     private val namingContext: Context = InitialContext()
     private val datasource: PoolingDataSource
 
-    private val userTransaction: UserTransaction
+    val userTransaction: UserTransaction
         get() = try {
             namingContext.lookup("java:comp/UserTransaction") as UserTransaction
         } catch (ex: Exception) {
@@ -44,6 +44,7 @@ open class TransactionManagerSetup @Throws(Exception::class)
         }
 
     init {
+
         logger.fine("Starting database connection pool")
 
         logger.fine("Setting stable unique identifier for transaction recovery")
@@ -100,9 +101,15 @@ open class TransactionManagerSetup @Throws(Exception::class)
         TransactionManagerServices.getTransactionManager().shutdown()
     }
 
+
+
     companion object {
         const val DATASOURCE_NAME = "myDS"
-        private val logger = Logger.getLogger(TransactionManagerSetup::class.java.name)
+        private val logger = logger<TransactionManagerSetup>()
+
+        private inline fun <reified T> logger(): Logger {
+            return Logger.getLogger(T::class.java.name)
+        }
     }
 
 }
