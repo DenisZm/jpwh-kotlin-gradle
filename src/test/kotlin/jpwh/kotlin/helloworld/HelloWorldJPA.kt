@@ -34,7 +34,8 @@ class HelloWorldJPA : TransactionManagerTest() {
 
                 val messages = entityManager
                     .createQuery("select m from Message m")
-                    .resultList as List<Message>
+                    .resultList
+                    .filterIsInstance<Message>()
                 // SELECT * from MESSAGE
 
 
